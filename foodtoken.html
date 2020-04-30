@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Food Token Project</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Civic - CV Resume">
+	<meta name="keywords" content="resume, civic, onepage, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->   
+	<link href="img/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/flaticon.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.css"/>
+	<link rel="stylesheet" href="css/magnific-popup.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+
+
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+	
+	<div class="home-five-style">
+		<!-- Header section start -->
+		<header class="header-section">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-7 text-md-right header-buttons">
+						<a href="#" class="site-btn">Download CV</a>
+						<a href="index.html" class="site-btn">Main Page</a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- Header section end -->
+
+		<!-- Resume section start -->
+		<section class="resume-section spad">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-10 col-xl-6 offset-lg-1 offset-xl-3 container-warp text-center p-xl-0">
+						<!-- <div class="section-title">
+							<h2>Virtual Food Token System</h2>
+						</div> -->
+						<div class="section-title">
+							<ul class="resume-list">
+								<li>
+									<h2>Virtual Food Token System</h2>
+									<br><br><br>
+									<h3>The Problem</h3>
+									<!-- <h4>What problems did we face in a traditional physical food token system?</h4> -->
+									<p style="text-align:left">In our annual college fest, volunteers were given food tokens in return for their work, which they could redeem at the cafeteria. Now these were small plastic chips, which could not be traced back to any legitmate source. Students in charge could also give their volunteer friends, extra tokens. Or in some cases, keep extra tokens for themselves and use them.<br>This meant that the college was having to pay for more food tokens than nessesary</p>
+								</li>
+								<li>
+									<h3>Our Solution</h3>
+									<p style="text-align:left">We decided to make an online coupon transferring system. Every volunteer and event organiser would get an user account, which in return held a balance of tokens. This user account would be linked to their college ID for identification.
+									<br>
+									These coupons could be transferred virtually from one account to another, given that it was allowed and did not break any rules.
+									<br>
+									Every time someone wanted to use a token, they could simply go up to the cafetaria, and on the click of a button on the web app, their coupon would get converted into a unique QR code. This QR code could then be scanned by the people present there. If the transaction was succesful, the balance of the user would be deducted and they would then get food.
+									<br>
+									The scanning part was done by the a different user type on our web app meant only for the people managing the cafeteria and food. Only they would be able to see this feature.
+									<br>
+									</p>
+								</li>
+								<li>
+									<h3>User accounts, Restrictions and Logging</h3><br>
+									<p style="text-align:left">There were 7 different user accounts in reality. Each level would be allowed to give coupons to the level below it, given that both were off the same event (for event heads) or of the same category (for category heads, as 1 category could hold multiple events). But for simplicity in explanation, Lets club them into these 3 types:  <br> 
+									1. Event Organisers<br>
+									2. Cafetaria and food managers (for scanning)<br>
+									3. Volunteers<br><br>
+									Again, please note that this is over simplified. In reality, there was a much more complicated system of interactions between users.<br>
+									The Event Organisers had an option to give 1 coupon per day to a volunteer in their event only. Every user and volunteer was mapped to an event in the database, so Event organisers of an event could not give tokens to volunteers of a different event. <br>
+									There was also a strict restriction of giving only 1 token per day to the volunteer. Once the token was given, the volunteers name would automatically disappear form the Event Organisers list till the end of the day. Note, that there can be multiple Event Organisers for each event, thus this concurency was taken care of. 
+									<br>
+									The Event organiser too, had a restriction of using only 1 token per day. They were automatically given 1 token per day by the system for personal use.</br><br>
+
+									Each transaction, or act of giving or redeeming a coupon was logged along with its timestamp, and the IDs of both users involved to provide proof and help in tallying the bill against the cafetarias. 
+								</p>
+							</li>
+							<li>
+							<h3>Transactions</h3>
+							<br><p style="text-align:left">
+									The transaction was done in a process like this - <br>
+										1. The user would first click on "Generate QR Code". Here the system would first check if the user had enough balance in the database. If yes, then QR code would be generated.<br>
+										2. Now the cafetaria manager would scan QR code. Here, the managers phone would extract the user ID and number of coupons requested from QR code. It would then perform another check to see if the user account had enough coupons. This extra step was to prevent users from using screenshots and availing unlimited coupons.<br>
+										3. If the scanner detected a valid amount of tokens in the users account, it would then deduct the balance. This was done in a single transaction to avoid data mismatch on failure.<br>
+										4. Finally the user would be given food<br>
+									This whole process would happen in under a second!<br>
+									</p>
+								</li>
+								<li>
+									<h3>Implementation</h3><br>
+									<p style="text-align:left">
+										The web app ended up going live and attracting 1000+ users. We did 7000+ transactions worth more than 1.6 Lakh Rupees!<br>
+										We used Amazon EC2 instances to host this, along with a MySQL database and node + Express for the backend.
+										 The flow of coupons is shown in a much simpler than in real life. It was much more complicated than this due to different organisations and different rules for each of them, and many different levels of fest managers. Sadly, all that can be quite confusing and is out of the scope of this article.
+									</p>
+								</li>
+								<li>
+									<h3>End notes</h3>
+									<p>This was a really fun and challenging project to do. The cherry on top was definetly it being used on such a large scale in my college. I learnt a lot about designing these systems and the workflows around them. We had to look into security concerns, user interactions, encrypting data, etc. Overall, it's definetly one of my favioriate projects. 
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<!-- Footer section start -->
+	<footer class="footer-section">
+		<div class="container text-center">
+			<div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</div>
+		</div>
+	</footer>
+	<!-- Footer section end -->
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/magnific-popup.min.js"></script>
+	<script src="js/circle-progress.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
