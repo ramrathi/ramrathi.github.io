@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="jquery.serialize-object.js"></script>
 	<title>Ramkumar Rathi</title>
 	<meta charset="UTF-8">
 	<meta name="keywords" content="resume, civic, onepage, creative, html">
@@ -295,7 +297,7 @@ implementing a layer of neural networks before it. Improved on the traditional m
 						<h2>Contact Me</h2>
 					</div>
 
-					<form class="contact-form" action="https://6fg0jf8xqe.execute-api.us-east-1.amazonaws.com/flasktest/contact" method = 'POST'>
+					<!-- <form class="contact-form" action="https://6fg0jf8xqe.execute-api.us-east-1.amazonaws.com/flasktest/contact" method = 'POST'>
 						<div class="row">
 							<div class="col-md-6">
 								<input type="text" placeholder="Name" name = 'name' required >
@@ -311,6 +313,24 @@ implementing a layer of neural networks before it. Improved on the traditional m
 						</div>
 						<div class="text-md-right">
 							<button class="site-btn">Send message</button>
+						</div>
+					</form> -->
+					<form class="contact-form" id="test-form">
+						<div class="row">
+							<div class="col-md-6">
+								<input type="text" placeholder="Name" name = 'name' required >
+							</div>
+							<div class="col-md-6">
+								<input type="text" placeholder="E-mail" name = 'email'required >
+							</div>
+
+							<div class="col-md-12">
+								<input type = 'text' placeholder="Subject" name = 'subject'required>
+								<textarea placeholder="Message" name = 'message' required></textarea>
+							</div>
+						</div>
+						<div class="text-md-right">
+							<button class="site-btn" id="submit-form">Send message</button>
 						</div>
 					</form>
 				</div>
@@ -334,12 +354,49 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	html {scroll-behavior: smooth;}
 </style>
 
-	<!--====== Javascripts & Jquery ======-->
-	<script src="js/jquery-2.1.4.min.js"></script>
+	
+	<script>
+	var $form = $('form#test-form'),
+		url = 'https://script.google.com/macros/s/AKfycbzP0mvxCAc7-f4ioWqLU4VdMJoqw2xHbV0eo7iuWukuR0hQfVZv/exec'
+	
+	$('#submit-form').on('click', function(e) {
+	  e.preventDefault();
+	  var jqxhr = $.ajax({
+		url: url,
+		method: "GET",
+		dataType: "json",
+		data: $form.serializeObject()
+	  }).success(
+		// do something
+		console.log("Sent, check karo")
+	  );
+	})</script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/magnific-popup.min.js"></script>
 	<script src="js/circle-progress.min.js"></script>
 	<script src="js/main.js"></script>
 </body>
+	
+<script>
+	var $form = $('form#test-form'),
+		url = 'https://script.google.com/macros/s/AKfycbzP0mvxCAc7-f4ioWqLU4VdMJoqw2xHbV0eo7iuWukuR0hQfVZv/exec'
+	
+	$('#submit-form').on('click', function(e) {
+	  e.preventDefault();
+	  var jqxhr = $.ajax({
+		url: url,
+		method: "GET",
+		dataType: "json",
+		data: $form.serializeObject()
+	  }).success(
+		window.location.href = "thanks.html"
+	  );
+	})</script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/magnific-popup.min.js"></script>
+	<script src="js/circle-progress.min.js"></script>
+	<script src="js/main.js"></script>
+
 </html>
